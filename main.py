@@ -81,3 +81,15 @@ async def checkout(request:Request):
 
 
 
+
+@app.post("/checkin",response_class=HTMLResponse)
+async def checkin(request:Request):
+    return templates.TemplateResponse("Attendance Ui/index.html",{"request":request})
+
+#checkout view 
+
+@app.post("/checkout",response_class=HTMLResponse)
+async def checkout(request:Request):
+    return templates.TemplateResponse("Attendance Ui/signup.html",{"request":request})
+
+

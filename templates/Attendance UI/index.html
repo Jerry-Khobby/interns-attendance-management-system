@@ -93,13 +93,13 @@
  <div class="timebtn">
     <div>
     <!----------------------------------------button for the signin page -->
-    <button type="submit" class="btn btn-primary btn-block mb-4" action="/register"  disabled>
+    <button type="submit" class="btn btn-primary btn-block mb-4"   disabled>
         Time In
       </button>
     </div>
     <div>
         <button type="submit" class="btn btn-primary btn-block mb-4">
-           <a href="./signup.html" >Time Out</a> 
+           <a href="/checkout" >Time Out</a> 
         <!----------------------------button for the signout page ------------------------------------------>
     </div>
         
@@ -114,17 +114,17 @@
   
           <div class="card bg-glass">
             <div class="card-body px-4 py-5 px-md-5">
-              <form action="/register" method="POST">
+              <form action="/checkin" method="POST">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
-                <div class="row">
+                <div class="row  it will contain the messages that we will sending as a success messages">
                   <div class="row">
-<!--------------------we have to render the messages over here ----------------------------------------->
+
                   </div>
-                 <img src="./img/logo.png" alt="" class="work">
+                 <img src="{{ url_for('static', path='img/logo.png') }}" alt="" class="work">
                   <h1 class="mb-3 h3">Sign In</h1>
                   <div class="col-md-12 mb-4">
                     <div class="form-outline">
-                      <input type="text" name="name" id="form3Example2" class="form-control" placeholder="Enter ID Number"/>
+                      <input type="text" name="name" id="form3Example2" class="form-control" placeholder="Enter ID Number" required/>
                     </div>
                   </div>
                 </div>
