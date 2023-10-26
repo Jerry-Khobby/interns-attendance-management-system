@@ -6,6 +6,7 @@ from database import engine, sessionlocal
 from sqlalchemy.orm import Session
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
  
 models.Base.metadata.create_all(bind=engine)
  
@@ -61,3 +62,22 @@ async def delete(request: Request, user_id: int, db: Session = Depends(get_db)):
     db.delete(users)
     db.commit()
     return RedirectResponse(url=app.url_path_for("home"), status_code=status.HTTP_303_SEE_OTHER)
+
+
+
+
+
+
+## working on the routing for the interns views , the first one is the checkin route 
+@app.get("/checkin",response_class=HTMLResponse)
+async def checkin(request:Request):
+    return templates.TemplateResponse("Attendance Ui/index.html",{"request":request})
+
+#checkout view 
+
+@app.get("/checkout",response_class=HTMLResponse)
+async def checkout(request:Request):
+    return templates.TemplateResponse("Attendance Ui/signup.html",{"request":request})
+
+
+
