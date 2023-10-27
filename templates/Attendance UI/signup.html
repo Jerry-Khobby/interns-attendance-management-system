@@ -120,12 +120,16 @@
             <div class="card-body px-4 py-5 px-md-5">
               <form action="/checkout" method="POST">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
-                <div class="row  it will contain the messages that we will sending as a success messages">
-                  <div class="row">
-
-
-                    
-                  </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <!-- Display the message and close button here -->
+           {% if message %}
+           <div class="alert alert-info alert-dismissible fade show" role="alert">
+               {{ message }}
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+       {% endif %}
+                 </div>
 
                  <img src="{{ url_for('static', path='img/logo.png') }}" alt="" class="work">
                   <h1 class="mb-3 h3">Sign Out</h1>

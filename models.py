@@ -1,5 +1,5 @@
 import random
-from sqlalchemy import Column, Integer, String,DateTime,ForeignKey
+from sqlalchemy import Column, Integer, String,DateTime,ForeignKey,Boolean 
 from database import Base
 from sqlalchemy.orm import relationship
 
@@ -33,6 +33,7 @@ class User(CustomBase):
 class Attendance(CustomBase):
     __tablename__ = "attendance"
     # Add other columns for day, date, and time
+    id = Column(Integer, primary_key=True, index=True)
     user_id=Column(Integer,ForeignKey('users.id'))
     sign_in_time = Column(DateTime, nullable=True)  # Timestamp for sign-in (mandatory)
     sign_out_time = Column(DateTime, nullable=True)   # Timestamp for sign-out (nullable)
