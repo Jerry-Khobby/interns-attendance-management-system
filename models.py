@@ -1,6 +1,7 @@
 import random
-from sqlalchemy import Column, Integer, String,DateTime
+from sqlalchemy import Column, Integer, String,DateTime,ForeignKey
 from database import Base
+from sqlalchemy.orm import relationship
 
 # Function to generate random 10-digit ID
 def generate_random_id():
@@ -21,6 +22,10 @@ class User(CustomBase):
     contact = Column(Integer)
     department_Assigned = Column(String(150))
 
+
+
+     # Establish a relationship with the Attendance table
+    attendances = relationship("Attendance", back_populates="user")
     def __repr__(self):
         return '<User %r>' % (self.id)
 
@@ -28,7 +33,15 @@ class User(CustomBase):
 class Attendance(CustomBase):
     __tablename__ = "attendance"
     # Add other columns for day, date, and time
+    user_id=Column(Integer,ForeignKey('users.id'))
     sign_in_time = Column(DateTime, nullable=True)  # Timestamp for sign-in (mandatory)
     sign_out_time = Column(DateTime, nullable=True)   # Timestamp for sign-out (nullable)
     sign_in_date = Column(String(50), nullable=True)  
     sign_out_date = Column(String(50), nullable=True)
+
+
+    # Establish a back-reference to the User table
+    user = relationship("User", back_populates="attendances")
+
+    def __repr__(self):
+        return '<Attendance %r>' % (self.id)
