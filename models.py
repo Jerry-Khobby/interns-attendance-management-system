@@ -44,4 +44,4 @@ class Attendance(CustomBase):
     user = relationship("User", back_populates="attendances")
 
     def __repr__(self):
-        return '<Attendance %r>' % (self.id)
+        return '<Attendance %r>' % (self.user_id)
