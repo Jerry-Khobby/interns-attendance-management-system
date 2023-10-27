@@ -144,41 +144,41 @@ async def checkin(request: Request, id_number: int = Form(...), db: Session = De
 
 @app.post("/checkout")
 async def checkout(request: Request, id_number: int = Form(...), db: Session = Depends(get_db)):
-    
-    print(id_number)
-    #getting the values of the sign_in
-    sign_in_time=models.Attendance.sign_in_time
-    sign_in_date=models.Attendance.sign_in_date
-    #getting the current date and time from the function that has been imported 
-    check_time =datetime.now()
-    check_out_date=check_time.strftime("%Y-%m-%d %H:%M:%S")
-    today_date=date.today().strftime("%Y-%m-%d") # getting the date of today 
+    # Get the current date and time
+    sign_out_time = datetime.now()
+    sign_out_date = sign_out_time.strftime("%Y-%m-%d %H:%M:%S")  # Format the date and time as needed
+    today_date = date.today().strftime("%Y-%m-%d")  # Get today's date in the same format
 
-    # checking by using the id , to see if the user really exist in the database 
-    user = db.query(models.User).filter(models.User.id==id_number).first()
+    # Check if the user ID exists in the database
+    user = db.query(models.User).filter(models.User.id == id_number).first()
 
-    #checking if the user trully exists in the database in the database 
     if user:
-        existing_attendance=db.query(models.Attendance).filter(
-            models.Attendance.user_id==id_number,
-            models.Attendance.sign_out_date== today_date,
+        # Check if the user has already signed out today
+        existing_attendance = db.query(models.Attendance).filter(
+            models.Attendance.user_id == id_number,
+            models.Attendance.sign_in_date == today_date,
+            models.Attendance.sign_out_time == None  # Check if sign_out_time is not set
         ).first()
+
         if existing_attendance:
-            print("You have already checkout today")
-            message=f"You have already checkout today , you cannot checkout again:{user.name}"
-        else:
-            attendance=models.Attendance(user_id=id_number,sign_in_time=sign_in_time,sign_in_date=sign_in_date,sign_out_time=check_time,sign_out_date=today_date)
-            db.add(attendance)
+            # User has signed in today but not signed out yet, update the record
+            existing_attendance.sign_out_time = sign_out_time
+            existing_attendance.sign_out_date = sign_out_time
             db.commit()
-            print("The user is in the database and it has been successfully added")
-            message = f"You have signed in successfully: {user.name}"
+            print("The user has been successfully checked out.")
+            message = f"You have signed out successfully: {user.name}"
+        else:
+            # User has either not signed in today or already signed out
+            print("User has not signed in today or has already signed out.")
+            message = f"{user.name} You have either not signed in today or have already signed out"
     else:
         # User does not exist, raise an HTTPException with 404 status code
-        print("There is an error, user is not in our database")
-        message = f"Error: User ID {user.id}  not found in the database.{user.name} See the Admin and get registered"
-        raise HTTPException(status_code=404, detail=message)    
+        print("User not found in the database.")
+        message = "Error: User ID {} not found in the database.Kindly hit the HR to register you".format(id_number)
+        raise HTTPException(status_code=404, detail=message)
 
     # Pass the message to the template response
-    return templates.TemplateResponse("Attendance Ui/signup.html", {"request": request,"message": message})
+    return templates.TemplateResponse("Attendance Ui/signup.html", {"request": request, "message": message})
+
 
 
