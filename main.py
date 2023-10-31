@@ -9,6 +9,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from datetime import date,time 
+from sqlalchemy.orm.exc import NoResultFound
  
 models.Base.metadata.create_all(bind=engine)
  
@@ -195,6 +196,22 @@ async def allinternsrecords(request: Request,db:Session=Depends(get_db)):
 
 
 #fetch the attendance data for just one intern
+#fetching the attendance  data of all the intern 
+@app.get("/myregister")
+async def myregister(request: Request,db:Session=Depends(get_db)):
+    attendance= db.query(models.Attendance).order_by(models.Attendance.user_id.desc())
+    return templates.TemplateResponse("Attendance Ui/myregister.html", {"request": request,"attendance":attendance})
+
+
+
+
+
+@app.post("/myregister")
+async def getting_my_register(request: Request, id_number: int = Form(...), db: Session = Depends(get_db)):
+   
+
+    return templates.TemplateResponse("singleattendance.html", {"request": request,})
+
 
 
 

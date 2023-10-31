@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <a href="/checkin" class="btn btn-primary">Back</a>
+        <br><br>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Sign In </th>
+                    <th>Sign Out</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rs in attendance %}
+                    <tr>
+                        <td>{{ rs.user_id }}</td>
+                        <td>{{ rs.user.name }}</td>
+                        <td>{{ rs.sign_in_time }}</td>
+                        <td>{{ rs.sign_out_time}}</td>
+                        <td>
+                         <a href="delete/{{ rs.id }}" class="btn btn-danger disabled">Delete</a>  
+                        </td>
+                    </tr>
+                {% endfor %}    
+            </tbody>
+        </table>
+    </div>
+</div>
+ 
+{% endblock content %}

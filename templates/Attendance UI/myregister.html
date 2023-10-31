@@ -91,29 +91,16 @@
           </h1>
           <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
  <div class="timebtn">
-    <div>
-    <button type="submit" class="btn btn-primary btn-block mb-4"   disabled>
-        Time In
-      </button>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-primary btn-block mb-4">
-           <a href="/checkout" >Time Out</a> 
-        </button>
-    </div>
-        
-    
 </div>
-          </p>
-        </div>
-  
+</p>
+</div>
         <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
           <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
           <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
   
           <div class="card bg-glass">
             <div class="card-body px-4 py-5 px-md-5">
-              <form action="/checkin" method="POST">
+              <form action="/myregister" method="POST">
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
                   <div class="col-md-12">
@@ -126,7 +113,7 @@
         {% endif %}
                   </div>
                  <img src="{{ url_for('static', path='img/logo.png') }}" alt="" class="work">
-                  <h1 class="mb-3 h3">Sign In</h1>
+                  <h1 class="mb-3 h3">Your ID Number</h1>
                   <div class="col-md-12 mb-4">
                     <div class="form-outline">
                       <input type="text" name="id_number" id="form3Example2" class="form-control" placeholder="Enter ID Number" required maxlength="10"  oninput="validateInputLength()"/>
@@ -142,9 +129,6 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block mt-5 w-auto">
-          <a href="/myregister" >My Register</a> 
-        </button>
       </div>
     </div>
   </section>
