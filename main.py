@@ -210,7 +210,11 @@ async def myregister(request: Request,db:Session=Depends(get_db)):
 async def getting_my_register(request: Request, id_number: int = Form(...), db: Session = Depends(get_db)):
     attendance =db.query(models.Attendance).filter(models.Attendance.user_id == id_number).first()
     #I am left to catch and handle , if not the user and I am done with the system 
+    if attendance is None:
+        message = "Your ID is not in the database. Please go to HR and register."
+        return templates.TemplateResponse("Attendance Ui/signup.html", {"request": request, "message": message})
     
+
     
     return templates.TemplateResponse("singleattendance.html", {"request": request,"attendance":[attendance]})
 
