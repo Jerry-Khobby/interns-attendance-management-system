@@ -208,9 +208,11 @@ async def myregister(request: Request,db:Session=Depends(get_db)):
 
 @app.post("/myregister")
 async def getting_my_register(request: Request, id_number: int = Form(...), db: Session = Depends(get_db)):
-   
-
-    return templates.TemplateResponse("singleattendance.html", {"request": request,})
+    attendance =db.query(models.Attendance).filter(models.Attendance.user_id == id_number).first()
+    #I am left to catch and handle , if not the user and I am done with the system 
+    
+    
+    return templates.TemplateResponse("singleattendance.html", {"request": request,"attendance":[attendance]})
 
 
 
