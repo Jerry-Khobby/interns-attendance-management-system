@@ -163,7 +163,7 @@ async def checkout(request: Request, id_number: int = Form(...), db: Session = D
         if existing_attendance:
             # User has signed in today but not signed out yet, update the record
             existing_attendance.sign_out_time = sign_out_time
-            existing_attendance.sign_out_date = sign_out_time
+            existing_attendance.sign_out_date = sign_out_date
             db.commit()
             print("The user has been successfully checked out.")
             message = f"You have signed out successfully: {user.name}"
@@ -175,10 +175,27 @@ async def checkout(request: Request, id_number: int = Form(...), db: Session = D
         # User does not exist, raise an HTTPException with 404 status code
         print("User not found in the database.")
         message = "Error: User ID {} not found in the database.Kindly hit the HR to register you".format(id_number)
-        raise HTTPException(status_code=404, detail=message)
+        return templates.TemplateResponse("Attendance Ui/signup.html", {"request": request, "message": message})
+        #raise HTTPException(status_code=404, detail=message)
+    
 
     # Pass the message to the template response
     return templates.TemplateResponse("Attendance Ui/signup.html", {"request": request, "message": message})
+
+
+
+
+
+#fetching the attendance  data of all the intern 
+@app.get("/allinternsrecords")
+async def allinternsrecords(request: Request,db:Session=Depends(get_db)):
+    attendance= db.query(models.Attendance).order_by(models.Attendance.user_id.desc())
+    return templates.TemplateResponse("allinterns.html", {"request": request,"attendance":attendance})
+
+
+
+#fetch the attendance data for just one intern
+
 
 
 

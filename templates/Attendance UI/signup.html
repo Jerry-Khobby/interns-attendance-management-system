@@ -135,7 +135,7 @@
                   <h1 class="mb-3 h3">Sign Out</h1>
                   <div class="col-md-12 mb-4">
                     <div class="form-outline">
-                      <input type="text" name="id_number" id="form3Example2" class="form-control" placeholder="Enter ID Number" required />
+                      <input type="text" name="id_number" id="form3Example2" class="form-control" placeholder="Enter ID Number" required  maxlength="10"   oninput="validateInputLength()"/>
                       
                     </div>
                   </div>
@@ -158,6 +158,18 @@
 
     <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
+<script>
+  function validateInputLength() {
+      var inputElement = document.getElementById("form3Example2");
+      var inputValue = inputElement.value;
+      var maxLength = parseInt(inputElement.getAttribute("maxlength"));
+  
+      if (inputValue.length > maxLength) {
+          alert("ID number should not exceed 10 digits.");
+          // Optionally, you can reset the input value or take other actions here
+          inputElement.value = inputValue.slice(0, maxLength);
+      }
+  }
+  </script>
 </body>
 </html>
