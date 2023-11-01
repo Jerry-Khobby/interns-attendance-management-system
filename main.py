@@ -26,7 +26,7 @@ def get_db():
     finally:
         db.close()
  
-@app.get("/")
+@app.get("/admin")
 async def home(request: Request, db: Session = Depends(get_db)):
     users = db.query(models.User).order_by(models.User.id.desc())
     return templates.TemplateResponse("index.html", {"request": request, "users": users})
@@ -87,7 +87,7 @@ async def delete(request: Request, user_id: int, db: Session = Depends(get_db)):
 
 
 ## working on the routing for the interns views , the first one is the checkin route 
-@app.get("/checkin")
+@app.get("/")
 async def checkin(request:Request):
     return templates.TemplateResponse("Attendance Ui/index.html",{"request":request})
 
@@ -217,6 +217,18 @@ async def getting_my_register(request: Request, id_number: int = Form(...), db: 
 
     
     return templates.TemplateResponse("singleattendance.html", {"request": request,"attendance":[attendance]})
+
+
+
+
+
+#working on the login session for the admin and the intern
+## working on the routing for the interns views , the first one is the checkin route 
+@app.get("/adminlogin")
+async def checkin(request:Request):
+    return templates.TemplateResponse("Attendance Ui/index.html",{"request":request})
+
+
 
 
 
