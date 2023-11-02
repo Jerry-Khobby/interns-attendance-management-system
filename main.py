@@ -26,7 +26,7 @@ def get_db():
     finally:
         db.close()
  
-@app.get("/admin")
+@app.get("/")
 async def home(request: Request, db: Session = Depends(get_db)):
     users = db.query(models.User).order_by(models.User.id.desc())
     return templates.TemplateResponse("index.html", {"request": request, "users": users})
@@ -87,7 +87,7 @@ async def delete(request: Request, user_id: int, db: Session = Depends(get_db)):
 
 
 ## working on the routing for the interns views , the first one is the checkin route 
-@app.get("/")
+@app.get("/checkin")
 async def checkin(request:Request):
     return templates.TemplateResponse("Attendance Ui/index.html",{"request":request})
 
