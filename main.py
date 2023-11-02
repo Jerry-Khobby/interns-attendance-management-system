@@ -28,8 +28,12 @@ def get_db():
         
 #root route to contain login form for admin        
 @app.get("/")
-async def loin_as_admin(request:Request):
+async def login_as_admin(request:Request):
     return templates.TemplateResponse("admin/login.html",{"request":request})
+
+@app.get("/newadmin")
+async def add_new_admin(request:Request):
+    return templates.TemplateResponse("admin/sign up.html",{"request":request})
  
 @app.get("/register")
 async def home(request: Request, db: Session = Depends(get_db)):
