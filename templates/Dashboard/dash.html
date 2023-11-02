@@ -1,0 +1,108 @@
+<span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Attendance Dashboard</title>
+      <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}"/>
+      <!-- Font Awesome Cdn Link -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    </head>
+    <body>
+      <div class="container">
+        <nav>
+          <ul>
+            <li><a href="#" class="logo">
+              <!-- <img src="./img/GI-KACE NEW LOGO_GI-KACE LOGO - MAIN copy.jpg"> -->
+              <span class="nav-item">Admin</span>
+            </a></li>
+            <li><a href="admin/">
+              <i class="fas fa-home"></i>
+              <span class="nav-item">Dashboard</span>
+            </a></li>
+            <li><a href="/register">
+              <i class="fas fa-users"></i>
+              <span class="nav-item">Interns</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-compass"></i>
+              <span class="nav-item">Attendance</span>
+            </a></li>
+            <li><a href="allinternsrecords/">
+                <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Report</span>
+            </a></li>
+            
+            <li><a href="#">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item">Setting</span>
+            </a></li>
+    
+            <li><a href="#" class="logout">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="nav-item">Log out</span>
+            </a></li>
+          </ul>
+        </nav>
+    
+    
+        <section class="main">
+          <div class="main-top">
+            <h1>Interns Attendance System</h1>
+            <i class="fas fa-user-cog"></i>
+          </div>
+          <div class="users">
+            <div class="card">
+              <img src="">
+              <h4></h4>
+              <p></p>
+             
+              <button></button>
+            </div>
+             <div class="card">
+              <img src="">
+              <h4>PRESENT SCHEDULE</h4>
+              <p></p>
+              <div id="clock"></div>
+             
+              <button></button>
+            </div>
+            <div class="card">
+                <img src="">
+                <h4></h4>
+                <p></p>
+               
+                <button></button>
+              </div>
+          </div>
+    
+          <section class="attendance">
+            <div class="attendance-list">
+              <h1>Attendance List</h1>
+              <iframe src="allinternsrecords/" width="100%" height="400"></iframe>
+
+            </div>
+          </section>
+        </section>
+      </div>
+    
+
+      <script>
+        function updateClock() {
+          const now = new Date();
+          const hours = now.getHours().toString().padStart(2, '0');
+          const minutes = now.getMinutes().toString().padStart(2, '0');
+          const seconds = now.getSeconds().toString().padStart(2, '0');
+          
+          const clock = document.getElementById('clock');
+          clock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+    
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+    
+        // Initial call to display the clock immediately
+        updateClock();
+      </script>
+    </body>
+    </html>
+    </span>

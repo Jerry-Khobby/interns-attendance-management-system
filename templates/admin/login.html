@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GI-KACE ATTENDANCE LOGIN FORM</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style2.css') }}">
+  <!-- <button><a href="register.html"></a></button> -->
+</head>
+<body>
+  <div class="login-box">
+    <img src="{{ url_for('static', path='img/GI-KACE NEW LOGO_GI-KACE LOGO - MAIN copy.jpg.') }}" alt="logo">
+    <h2>GI-KACE Attendance Login</h2>
+    <form>
+      <div class="user-box">
+        <input type="text" name="" required="">
+        <label>Username/Email</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="" required="">
+        <label>Password</label>
+      </div>
+      <a href="#" class="submit-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </a>
+    </form>
+    <p class="reset-password"><a href="./register.html" style="color: white;">Reset Password</a></p>
+    <p class="register" style="color: white;">Don't have an account? <a href="#" style="color: red;">Register</a></p>
+  </div>
+  <script src="./index.js"></script>
+</body>
+</html>

@@ -25,11 +25,21 @@ def get_db():
         yield db
     finally:
         db.close()
- 
+        
+#root route to contain login form for admin        
 @app.get("/")
+async def loin_as_admin(request:Request):
+    return templates.TemplateResponse("admin/login.html",{"request":request})
+ 
+@app.get("/register")
 async def home(request: Request, db: Session = Depends(get_db)):
     users = db.query(models.User).order_by(models.User.id.desc())
     return templates.TemplateResponse("index.html", {"request": request, "users": users})
+
+#admin dashboard route
+@app.get("/admin")
+async def dashboard(request: Request):
+    return templates.TemplateResponse("Dashboard/dash.html", {"request": request})
  
 @app.post("/add")
 async def add(request: Request, name: str = Form(...), contact: str = Form(...), department: str = Form(...), db: Session = Depends(get_db)):
@@ -217,18 +227,6 @@ async def getting_my_register(request: Request, id_number: int = Form(...), db: 
 
     
     return templates.TemplateResponse("singleattendance.html", {"request": request,"attendance":[attendance]})
-
-
-
-
-
-#working on the login session for the admin and the intern
-## working on the routing for the interns views , the first one is the checkin route 
-@app.get("/adminlogin")
-async def checkin(request:Request):
-    return templates.TemplateResponse("Attendance Ui/index.html",{"request":request})
-
-
 
 
 
