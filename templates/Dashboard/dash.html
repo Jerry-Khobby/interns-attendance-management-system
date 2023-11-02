@@ -11,8 +11,8 @@
       <div class="container">
         <nav>
           <ul>
-            <li><a href="#" class="logo">
-              <!-- <img src="./img/GI-KACE NEW LOGO_GI-KACE LOGO - MAIN copy.jpg"> -->
+            <li><a href="admin/" class="logo">
+              <img src="{{ url_for('static', path='img/GI-KACE NEW LOGO_GI-KACE LOGO - MAIN copy.jpg.') }}">
               <span class="nav-item">Admin</span>
             </a></li>
             <li><a href="admin/">
@@ -37,7 +37,7 @@
               <span class="nav-item">Setting</span>
             </a></li>
     
-            <li><a href="#" class="logout">
+            <li><a href="/" class="logout">
               <i class="fas fa-sign-out-alt"></i>
               <span class="nav-item">Log out</span>
             </a></li>
@@ -52,23 +52,24 @@
           </div>
           <div class="users">
             <div class="card">
-              <img src="">
-              <h4></h4>
+              <img src="{{ url_for('static', path='img/users.png') }}">
+              <h4>INTERNS</h4>
+              <!--have to display number on roll for interns assinged with ID-->
               <p></p>
              
-              <button></button>
+              <button>VIEW</button>
             </div>
              <div class="card">
-              <img src="">
-              <h4>PRESENT SCHEDULE</h4>
+              <img src="{{ url_for('static', path='img/clock.png') }}">
+              <h4>TIME</h4>
               <p></p>
               <div id="clock"></div>
              
               <button></button>
             </div>
             <div class="card">
-                <img src="">
-                <h4></h4>
+              <img src="{{ url_for('static', path='img/statistics.jpg') }}">
+                <h4>STATISTICS</h4>
                 <p></p>
                
                 <button></button>
@@ -79,7 +80,6 @@
             <div class="attendance-list">
               <h1>Attendance List</h1>
               <iframe src="allinternsrecords/" width="100%" height="400"></iframe>
-
             </div>
           </section>
         </section>
